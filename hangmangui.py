@@ -172,7 +172,7 @@ class HangmanGame:
             outcome = "Look at that! You did it!"
             self.message.set(outcome)
             self.update_guesses(guess)
-            self.submit_button.config(state=tk.DISABLED)
+            self.submit_button.config(command=lambda: None)
             self.entry.unbind("<Return>")
             self.success_screen()
         if self.misses_left == 0:
@@ -180,7 +180,7 @@ class HangmanGame:
             self.message.set(outcome)
             self.update_guesses(guess)
             self.art_screen(self.misses_left)
-            self.submit_button.config(state=tk.DISABLED)
+            self.submit_button.config(command=lambda: None)
             self.entry.unbind("<Return>")
             self.defeat_screen()
         self.art_screen(self.misses_left)
@@ -206,7 +206,6 @@ class HangmanGame:
             self.gallows6.set("|     / ")
         elif misses_left == 0:
             self.gallows6.set(" |     / \\")
-
 
     def defeat_screen(self):
         # Runs when misses_left reaches 0
@@ -256,7 +255,7 @@ class HangmanGame:
         success_window.geometry("400x500")
 
         # Success Frame
-        success_frame = ttk.Frame(success_window, padding="10 10 10 10")
+        success_frame = ttk.Frame(success_window, padding="40 10 40 10")
         success_frame.pack(fill=tk.BOTH, expand=True)
 
         title = "--- * S * U * C * C * E * S * S * ---"
@@ -265,7 +264,10 @@ class HangmanGame:
         answer_reveal = tk.StringVar()
         answer_reveal.set(" ".join(self.answer_dashes))
         line2 = tk.StringVar()
-        line2.set(f"with {self.misses_left} misses left!")
+        if self.misses_left > 1:
+            line2.set(f"with {self.misses_left} misses left!")
+        else:
+            line2.set(f"with a single miss left!")
 
         gallows1 = "_______  "
         gallows2 = "|/     |  "
@@ -344,7 +346,8 @@ class HangmanLogic:
             answer = random.choice(possible_answers_list)
             return answer
 
-    def answer_dashes(self, answer):
+    @staticmethod
+    def answer_dashes(answer):
         return ["_"] * len(answer)
 
 
