@@ -136,7 +136,7 @@ class HangmanGame:
                 outcome = "You already guessed that word! Try again"
                 self.message.set(outcome)
             else:
-                self.misses_left += -1
+                self.misses_left -= 1
                 self.update_guesses(guess)
                 outcome = "Sorry, your guess wasn't quite right!"
                 self.message.set(outcome)
