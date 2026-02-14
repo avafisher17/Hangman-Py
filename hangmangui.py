@@ -121,9 +121,6 @@ class HangmanGame:
     def on_guess(self):
         # Runs when "Submit" button is clicked
         guess = self.entry.get().lower()
-        special_characters = ['~', '`', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+', '{', '[',
-                              '}', '}',
-                              '|', '\\', ':', ';', '\"', '\'', ',', '<', '.', '>', '?', '/', ' ']
         # Whole word guesses
         if len(guess) > 1:
             if guess == self.answer:
@@ -145,7 +142,7 @@ class HangmanGame:
             if guess.isdigit():
                 outcome = "This word doesn't contain any numbers! Try again"
                 self.message.set(outcome)
-            elif guess in special_characters:
+            elif not guess.isalnum():
                 outcome = "This word doesn't contain any special characters! Try again"
                 self.message.set(outcome)
             elif guess in self.guesses:
