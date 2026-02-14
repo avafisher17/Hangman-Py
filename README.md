@@ -12,9 +12,9 @@ A GUI of the classic Hangman game, written in Python. The player guesses letters
 ## How to Run
 
 1\. Install uv: https://astral.sh/uv
-2\. Clone the repo
-3\. Run "uv sync" to install dependencies
-4\. Run "uv run python main.py"
+2. Clone the repo
+3. Run "uv sync" to install dependencies
+4. Run "uv run python main.py"
 
 ## Technologies Used
 
